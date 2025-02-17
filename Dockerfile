@@ -34,7 +34,10 @@ COPY bun.lock bun.lock
 
 
 # 使用第一层镜像中安装的环境
-COPY --from=base / /  
+# 拷贝第一阶段中安装的环境
+COPY --from=base /usr /usr
+COPY --from=base /lib /lib
+COPY --from=base /etc /etc 
 
 RUN bunx puppeteer browsers install chrome
 RUN bun install
