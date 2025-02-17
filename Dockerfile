@@ -6,6 +6,8 @@ WORKDIR /app
 COPY package.json package.json
 COPY bun.lock bun.lock
 
+RUN bunx puppeteer browsers install
+
 RUN bun install
 
 COPY ./src ./src
