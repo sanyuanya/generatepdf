@@ -26,6 +26,12 @@ RUN apt-get update && apt-get install -y \
 # 安装 bun
 RUN curl -fsSL https://bun.sh/install | bash
 
+# 将 bun 可执行文件添加到 PATH 中
+ENV PATH="/root/.bun/bin:$PATH"
+
+# 验证 bun 是否成功安装
+RUN bun --version
+
 WORKDIR /app
 
 # Cache packages installation
