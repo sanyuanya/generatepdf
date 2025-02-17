@@ -6,6 +6,26 @@ WORKDIR /app
 COPY package.json package.json
 COPY bun.lock bun.lock
 
+RUN apt-get update && apt-get install -y \
+  libnss3 \
+  libatk-bridge2.0-0 \
+  libxss1 \
+  libgdk-pixbuf2.0-0 \
+  libdbus-glib-1-2 \
+  libxtst6 \
+  libappindicator3-1 \
+  libatk1.0-0 \
+  libatspi2.0-0 \
+  libnspr4 \
+  libnss3 \
+  libx11-xcb1 \
+  libgobject-2.0-0 \
+  libglib2.0-0 \
+  libcups2 \
+  libxcomposite1 \
+  libxdamage1 \
+  libxi6 \
+  libxt6
 RUN bunx puppeteer browsers install chrome
 RUN bun install
 
