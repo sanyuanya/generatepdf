@@ -1,4 +1,4 @@
-FROM oven/bun AS build
+FROM oven/bun:debain AS build
 
 WORKDIR /app
 
