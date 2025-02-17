@@ -23,8 +23,8 @@ RUN apt-get update && apt-get install -y \
   libxi6 \
   libxt6
 
-
-FROM oven/bun AS build
+# 安装 bun
+RUN curl -fsSL https://bun.sh/install | bash
 
 WORKDIR /app
 
@@ -32,12 +32,6 @@ WORKDIR /app
 COPY package.json package.json
 COPY bun.lock bun.lock
 
-
-# 使用第一层镜像中安装的环境
-# 拷贝第一阶段中安装的环境
-COPY --from=base /usr /usr
-COPY --from=base /lib /lib
-COPY --from=base /etc /etc 
 
 RUN bunx puppeteer browsers install chrome
 RUN bun install
