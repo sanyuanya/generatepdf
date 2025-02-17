@@ -21,7 +21,8 @@ RUN apt-get update && apt-get install -y \
   libxcomposite1 \
   libxdamage1 \
   libxi6 \
-  libxt6
+  libxt6 \
+  curl
 
 # 安装 bun
 RUN curl -fsSL https://bun.sh/install | bash
@@ -31,6 +32,7 @@ ENV PATH="/root/.bun/bin:$PATH"
 
 # 验证 bun 是否成功安装
 RUN bun --version
+
 
 WORKDIR /app
 
