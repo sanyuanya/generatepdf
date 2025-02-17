@@ -22,7 +22,8 @@ RUN apt-get update && apt-get install -y \
   libxdamage1 \
   libxi6 \
   libxt6 \
-  curl
+  curl \
+  unzip 
 
 # 安装 bun
 RUN curl -fsSL https://bun.sh/install | bash
