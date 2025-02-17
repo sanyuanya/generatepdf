@@ -1,5 +1,5 @@
 # 第一层：安装环境
-FROM ubuntu:latest AS base
+FROM ubuntu AS base
 
 # 更新包列表并安装必要的依赖
 RUN apt-get update && apt-get install -y \
@@ -31,7 +31,6 @@ WORKDIR /app
 # Cache packages installation
 COPY package.json package.json
 COPY bun.lock bun.lock
-
 
 RUN bunx puppeteer browsers install chrome
 RUN bun install
