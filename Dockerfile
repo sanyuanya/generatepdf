@@ -1,5 +1,5 @@
 # 第一层：安装环境
-FROM ubuntu AS base
+FROM ubuntu AS build
 
 # 更新包列表并安装必要的依赖
 RUN apt-get update && apt-get install -y \
