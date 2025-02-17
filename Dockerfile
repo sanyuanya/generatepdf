@@ -24,7 +24,7 @@ RUN apt-get update && apt-get install -y \
   libxt6
 
 
-FROM oven/bun:debian AS build
+FROM oven/bun AS build
 
 WORKDIR /app
 
