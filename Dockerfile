@@ -3,6 +3,8 @@ FROM debian AS build
 
 # 更新包列表并安装必要的依赖
 RUN apt-get update && apt-get install -y \
+  gnupg \
+  gnupg2 \
   ca-certificates \
   fonts-liberation \
   libasound2 \
