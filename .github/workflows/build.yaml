@@ -29,15 +29,15 @@ jobs:
           push: true
           tags: ${{ vars.DOCKERHUB_USERNAME }}/generatepdf:latest
       
-      - name: Pull image 
-        run: |
-          mkdir -p image
-          docker pull ${{ vars.DOCKERHUB_USERNAME }}/generatepdf:latest
-          docker save -o image/generatepdf.tar ${{ vars.DOCKERHUB_USERNAME }}/generatepdf:latest
+      - name: Pull Docker image
+        run: docker pull ${{ vars.DOCKERHUB_USERNAME }}/generatepdf:latest
+      
+      - name: Save Docker image as tar 
+        run: docker save -o generatepdf.tar ${{ vars.DOCKERHUB_USERNAME }}/generatepdf:latest
       
       - name: Upload Docker Image as Artifact
         uses: actions/upload-artifact@v4
         with:
           name: generatepdf-image
-          path: image/generatepdf.tar
+          path: generatepdf.tar
       
