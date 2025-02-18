@@ -42,7 +42,6 @@ const app = new Elysia().post("/generatepdf", async ({body}) => {
 }, {
   body: t.Object({
     url:t.String(),
-    output: t.String(),
   })
 }).listen(3000);
 
