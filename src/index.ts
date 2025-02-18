@@ -8,6 +8,8 @@ const app = new Elysia().post("/generatepdf", async ({body}) => {
       "--ignore-certificate-errors",
       "--disable-web-security", // 仅用于调试，不建议在生产环境中使用
       "--allow-insecure-localhost",
+      "--no-sandbox", 
+      "--disable-setuid-sandbox",
     ],
   });
   const page = await browser.newPage();
