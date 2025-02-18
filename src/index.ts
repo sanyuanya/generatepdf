@@ -1,3 +1,4 @@
+import fs from "fs";
 import { Elysia,t} from "elysia";
 import puppeteer from "puppeteer";
 
@@ -19,29 +20,24 @@ const app = new Elysia().post("/generatepdf", async ({body}) => {
       waitUntil: "networkidle2",
     });
 
-    await page.pdf({
-      path: body.output,
+    const pdfUint8Array = await page.pdf({
       format: "A4",
       scale: 0.5,
       printBackground: true,
-      margin: {
-        top: 50,
-        left: 40,
-        right: 40,
-      },
+      margin: { top: 50, left: 40, right: 40,},
     });
-  } catch (error) {
+
     return {
-      message: error,
-      status: "failure",
+      message: "ok", code : "success", data: Buffer.from(pdfUint8Array).toString("base64"),
     }
-  }
-
-  await browser.close();
-
-  return {
-    message: "",
-    data: "succedd",
+  } catch (error) {
+    return { 
+      message: error, code: "failure", data: "",
+    }
+  } finally {
+    if (browser) {
+      await browser.close();
+    }
   }
 }, {
   body: t.Object({
