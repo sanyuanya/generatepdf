@@ -2,7 +2,13 @@ import fs from "fs";
 import { Elysia,t} from "elysia";
 import puppeteer from "puppeteer";
 
-const app = new Elysia().post("/generatepdf", async ({body}) => {
+const app = new Elysia().onError(({ code, error }) => {
+
+  if (code === "VALIDATION") {
+    return {message: JSON.stringify(error), code: "vaildation", data: ""}
+  }
+
+}).post("/generatepdf", async ({body}) => {
 
   const browser = await puppeteer.launch({
     args: [
@@ -32,7 +38,7 @@ const app = new Elysia().post("/generatepdf", async ({body}) => {
     }
   } catch (error) {
     return { 
-      message: error, code: "failure", data: "",
+      message: JSON.stringify(error), code: "failure", data: "",
     }
   } finally {
     if (browser) {
@@ -41,7 +47,9 @@ const app = new Elysia().post("/generatepdf", async ({body}) => {
   }
 }, {
   body: t.Object({
-    url:t.String(),
+    url:t.String({
+      error: "需要一个URL地址"
+    }),
   })
 }).listen(3000);
 
