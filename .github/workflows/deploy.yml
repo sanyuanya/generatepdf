@@ -38,7 +38,7 @@ jobs:
         uses: denoland/deployctl@v1
         with:
           project: "sanyuanya-generatepdf-95"
-          entrypoint: ""
+          entrypoint: "src/index.ts"
           root: ""
           
           
