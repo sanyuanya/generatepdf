@@ -1,4 +1,3 @@
-import fs from "fs";
 import { Elysia,t} from "elysia";
 import puppeteer from "puppeteer";
 
@@ -33,8 +32,15 @@ const app = new Elysia().onError(({ code, error }) => {
       margin: { top: 50, left: 40, right: 40,},
     });
 
+    const screenshotbase64 = page.screenshot({
+      encoding: "base64"
+    });
+
     return {
-      message: "ok", code : "success", data: Buffer.from(pdfUint8Array).toString("base64"),
+      message: "ok", 
+      code : "success", 
+      data: screenshotbase64,
+      // data: Buffer.from(pdfUint8Array).toString("base64"),
     }
   } catch (error) {
     return { 
