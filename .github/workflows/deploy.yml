@@ -32,13 +32,13 @@ jobs:
         run: "npm install -g bun"
 
       - name: Build step
-        run: "bun install && bun dev"
+        run: "bun install && bun dev &"
 
       - name: Upload to Deno Deploy
         uses: denoland/deployctl@v1
         with:
           project: "sanyuanya-generatepdf-95"
-          entrypoint: "generatepdf"
+          entrypoint: "src/index.ts"
           root: ""
           
           
