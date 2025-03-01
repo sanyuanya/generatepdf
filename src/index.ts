@@ -57,10 +57,7 @@ const app = new Elysia().onError(({ code, error }) => {
       error: "需要一个URL地址"
     }),
   })
-})
-//.listen(3000);
-
-export default app.fetch;
+}).listen(3000);
 
 console.log(
   `🦊 Elysia is running at ${app.server?.hostname}:${app.server?.port}`
