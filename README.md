@@ -96,4 +96,6 @@ curl -X POST \
 ```bash
 echo "JVBERi0xLj4..." | base64 --decode > output.pdf
 ```
+## Star History
 
+[![Star History Chart](https://api.star-history.com/svg?repos=hj21222/generatepdf&type=Timeline)](https://www.star-history.com/#hj21222/generatepdf&Timeline)
