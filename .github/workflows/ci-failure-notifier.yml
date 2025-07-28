@@ -1,0 +1,50 @@
+name: build
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - "main"
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: checkout code
+        uses: actions/checkout@v3
+
+      - name: Login to Docker Hub
+        uses: docker/login-action@v3
+        with:
+          username: ${{ vars.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+
+      - name: Set up QEMU
+        uses: docker/setup-qemu-action@v3
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
+      - name: Build and push
+        uses: docker/build-push-action@v6
+        with:
+          push: true
+          tags: ${{ vars.DOCKERHUB_USERNAME }}/generatepdf:latest
+      
+      - name: Pull Docker image
+        run: docker pull ${{ vars.DOCKERHUB_USERNAME }}/generatepdf:latest
+      
+      - name: Save Docker image as tar 
+        run: docker save -o generatepdf.tar ${{ vars.DOCKERHUB_USERNAME }}/generatepdf:latest
+      
+      - name: Upload Docker Image as Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: generatepdf
+          path: ./generatepdf.tar
+      - name: Notify API with build result
+        if: always()   # 保证无论成功失败都执行
+        uses: ./my-action
+        with:
+          api_url: https://smee.io/GqhHfLSplbhYu4    # 你的API地址
+          status: ${{ job.status }}           # success / failure / cancelled
+          github_token: "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"
+      
