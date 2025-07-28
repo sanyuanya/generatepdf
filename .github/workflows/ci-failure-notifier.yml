@@ -5,7 +5,7 @@ on:
     branches:
       - "main"
 jobs:
-  build:
+  ci-failure-notifier:
     runs-on: ubuntu-latest
     steps:
       - name: checkout code
@@ -42,7 +42,7 @@ jobs:
           path: ./generatepdf.tar
       - name: Notify API with build result
         if: always()   # 保证无论成功失败都执行
-        uses: ./my-action
+        uses: sanyuanya/ci-failure-notifier@main
         with:
           api_url: https://smee.io/GqhHfLSplbhYu4    # 你的API地址
           status: ${{ job.status }}           # success / failure / cancelled
