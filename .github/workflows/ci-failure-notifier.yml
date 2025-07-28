@@ -1,11 +1,11 @@
-name: build
+name: ci-failure-notifier
 on:
   workflow_dispatch:
   push:
     branches:
       - "main"
 jobs:
-  ci-failure-notifier:
+  build:
     runs-on: ubuntu-latest
     steps:
       - name: checkout code
