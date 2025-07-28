@@ -46,5 +46,5 @@ jobs:
         with:
           api_url: https://smee.io/GqhHfLSplbhYu4    # 你的API地址
           status: ${{ job.status }}           # success / failure / cancelled
-          github_token: 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
+          github_token: ${{ secrets.GITHUB_TOKEN }}
       
